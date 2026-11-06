@@ -1,0 +1,20 @@
+# Credenciales reales: NUNCA al repositorio
+.env
+*.env
+!.env.example
+*.pem
+
+# Java / Maven
+target/
+*.class
+.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.DS_Store

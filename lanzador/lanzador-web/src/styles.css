@@ -1,0 +1,21 @@
+:root {
+  --navy: #004b96;
+  --teal: #009baf;
+  --light: #e7f6fa;
+  --text: #142330;
+  --border: #87becd;
+}
+body { background: #f4fafc; color: var(--text); }
+.barra { background: linear-gradient(90deg, var(--navy), var(--teal)); color: #fff; }
+.tarjeta { background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+.tarjeta h2 { font-size: 1rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .02em; }
+.dato { background: var(--light); border-radius: 10px; text-align: center; padding: .6rem .4rem; }
+.dato .n { font-size: 1.8rem; font-weight: 700; color: var(--navy); line-height: 1.1; }
+.dato .l { font-size: .78rem; font-weight: 600; }
+.log { max-height: 420px; overflow-y: auto; font-family: "Courier New", monospace; font-size: .8rem; }
+.log table { margin: 0; }
+.log thead th { position: sticky; top: 0; background: var(--teal); color: #fff; z-index: 1; }
+.btn-teal { background: var(--teal); color: #fff; border: none; }
+.btn-teal:hover { background: #007f90; color: #fff; }
+.btn-navy { background: var(--navy); color: #fff; border: none; }
+.btn-navy:hover { background: #003a75; color: #fff; }

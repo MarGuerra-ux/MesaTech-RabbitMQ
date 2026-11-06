@@ -1,0 +1,17 @@
+# EC2 A · Copiar a /etc/systemd/system/ y ejecutar:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now mesatech-bff
+[Unit]
+Description=MesaTech BFF con validación JWT Entra ID (puerto 8080)
+After=network-online.target mesatech-catalogo.service
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/mesatech/bff
+EnvironmentFile=/opt/mesatech/bff/.env
+ExecStart=/usr/bin/java -Xms128m -Xmx320m -jar /opt/mesatech/bff/bff.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+.env
+*.env
+!.env.example
+*.pem
+target/
+node_modules/
+build/
+.vscode/
+.idea/

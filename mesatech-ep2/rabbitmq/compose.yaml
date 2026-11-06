@@ -1,0 +1,39 @@
+# MesaTech Cloud - EP2 - Broker RabbitMQ (EC2 C, Ubuntu 24.04 LTS)
+# Validar:  docker compose config --quiet
+# Descargar: docker compose pull
+# Arrancar: docker compose up -d
+# Estado:   docker compose ps
+# Logs:     docker compose logs --tail=100 rabbitmq
+
+name: mesatech-broker
+
+services:
+  rabbitmq:
+    # Imagen oficial con etiqueta explícita que incluye la interfaz de administración
+    image: rabbitmq:4.1-management
+    container_name: mesatech-rabbitmq
+    # Hostname estable: RabbitMQ guarda sus datos bajo el nombre de nodo (rabbit@<hostname>).
+    # Si cambia el hostname, al recrear el contenedor no encuentra el vhost, la cola ni los mensajes.
+    hostname: rabbitmq-mesatech
+    # Credenciales del administrador fuera del repositorio (archivo .env, no versionado)
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_ADMIN_USER:?Definir RABBITMQ_ADMIN_USER en .env}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_ADMIN_PASS:?Definir RABBITMQ_ADMIN_PASS en .env}
+    ports:
+      - "5672:5672"     # AMQP: solo EC2 Catálogo y Solicitudes (security group), red privada
+      - "15672:15672"   # Administración HTTP: solo IP administrativa /32
+    volumes:
+      # Volumen persistente: conserva definiciones y mensajes persistentes al recrear el contenedor
+      - rabbitmq_data:/var/lib/rabbitmq
+    # Política de reinicio: vuelve a levantar el broker si se cae o si se reinicia la EC2
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  rabbitmq_data:
+    name: mesatech_rabbitmq_data

@@ -1,0 +1,17 @@
+# EC2 A · Copiar a /etc/systemd/system/ y ejecutar:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now mesatech-catalogo
+[Unit]
+Description=MesaTech Catálogo + publicador (puerto 8081)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/mesatech/catalogo
+EnvironmentFile=/opt/mesatech/catalogo/.env
+ExecStart=/usr/bin/java -Xms128m -Xmx384m -jar /opt/mesatech/catalogo/catalogo-service.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

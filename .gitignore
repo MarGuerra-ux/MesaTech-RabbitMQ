@@ -1,0 +1,20 @@
+# ===== Llaves y credenciales: NUNCA al repositorio =====
+*.pem
+*.key
+.env
+*.env
+!.env.example
+
+# ===== Compilados y dependencias =====
+target/
+node_modules/
+build/
+.mvn/wrapper/maven-wrapper.jar
+
+# ===== IDE / sistema =====
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini

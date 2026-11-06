@@ -1,0 +1,18 @@
+# EC2 B · Copiar a /etc/systemd/system/ y ejecutar:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now mesatech-solicitudes
+# Detener el consumidor (P3/P5): sudo systemctl stop mesatech-solicitudes
+[Unit]
+Description=MesaTech Solicitudes + consumidor (puerto 8082)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/mesatech/solicitudes
+EnvironmentFile=/opt/mesatech/solicitudes/.env
+ExecStart=/usr/bin/java -Xms128m -Xmx384m -jar /opt/mesatech/solicitudes/solicitudes-service.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
