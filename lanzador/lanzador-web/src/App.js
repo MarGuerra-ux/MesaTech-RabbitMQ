@@ -3,7 +3,7 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/
 import Axios from "axios";
 import { apiRequest, loginRequest } from "./authConfig";
 
-const MAX_CANTIDAD = 50;
+const MAX_CANTIDAD = 100;
 const MIN_INTERVALO = 200;
 const RABBIT_URL = process.env.REACT_APP_RABBIT_URL;
 
